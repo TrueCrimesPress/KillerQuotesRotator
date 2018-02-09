@@ -1,0 +1,76 @@
+body {
+  font: 14px/20px Arial,sans-serif;
+  color:#222;
+}
+
+.kill-quotes {
+  width: 640px;
+  height:100px;
+  position:relative;
+}
+
+.kill-quotes blockquote {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  font-size: 14px;
+  text-align: center;
+  opacity: 0;
+  z-index: 0;
+  transition: opacity 0.5s ease-out 0s, transform 0.5s ease-in 0s;
+}
+
+/* IE < 10 fallback */
+.no-csstransitions .kill-quotes blockquote,
+.no-csstransforms .kill-quotes blockquote {
+   position:relative;
+}
+
+.kill-quotes blockquote:first-child {
+    opacity: 0;
+    transform: translateY(-10px) scale(1.1);
+}
+.kill-quotes blockquote:first-child + blockquote {
+    opacity: 1;
+    z-index: 1;
+    transition: opacity 1.6s ease 0s;
+}
+.kill-quotes blockquote p{
+  font-size:24px;
+  font-weight:normal;
+  font-style:italic;
+  color:#353535;
+  line-height: 30px;
+  margin-bottom: 10px;
+}
+.kill-quotes blockquote p:before {
+   content: '\201C';
+}
+.kill-quotes blockquote p:after {
+   content: '\201D';
+}
+.kill-quotes blockquote cite {
+    text-align: center;
+    font-size: 14px;
+    color: #898989;
+}
+.kill-quotes blockquote cite a {
+  font-size:14px;
+  font-weight:normal;
+}
+
+
+
+.container {
+  
+max-width:100%;
+margin:0 auto;  
+
+}
+
+#quotes {
+  margin:0 auto;
+  width:100%;
+
+}
