@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link href="https://production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" rel="shortcut icon" type="image/x-icon">
+	<link href="https://production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" rel="mask-icon" type="">
+	<title>CodePen - Rotating quotes</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript">
+	</script>
+	<style>
+	     body {
+	 font: 14px/20px Arial,sans-serif;
+	 color:#222;
+	}
+
+	.kill-quotes {
+	 width: 640px;
+	 height:100px;
+	 position:relative;
+	}
+
+	.kill-quotes blockquote {
+	 position: absolute;
+	 bottom: 0px;
+	 left: 0px;
+	 right: 0px;
+	 font-size: 14px;
+	 text-align: center;
+	 opacity: 0;
+	 z-index: 0;
+	 transition: opacity 0.5s ease-out 0s, transform 0.5s ease-in 0s;
+	}
+
+	/* IE < 10 fallback */
+	.no-csstransitions .kill-quotes blockquote,
+	.no-csstransforms .kill-quotes blockquote {
+	  position:relative;
+	}
+
+	.kill-quotes blockquote:first-child {
+	   opacity: 0;
+	   transform: translateY(-10px) scale(1.1);
+	}
+	.kill-quotes blockquote:first-child + blockquote {
+	   opacity: 1;
+	   z-index: 1;
+	   transition: opacity 1.6s ease 0s;
+	}
+	.kill-quotes blockquote p{
+	 font-size:24px;
+	 font-weight:normal;
+	 font-style:italic;
+	 color:#353535;
+	 line-height: 30px;
+	 margin-bottom: 10px;
+	}
+	.kill-quotes blockquote p:before {
+	  content: '\201C';
+	}
+	.kill-quotes blockquote p:after {
+	  content: '\201D';
+	}
+	.kill-quotes blockquote cite {
+	   text-align: center;
+	   font-size: 14px;
+	   color: #898989;
+	}
+	.kill-quotes blockquote cite a {
+	 font-size:14px;
+	 font-weight:normal;
+	}
+
+
+
+	.container {
+	 
+	max-width:100%;
+	margin:0 auto;  
+
+	}
+
+	#quotes {
+	 margin:0 auto;
+	 width:100%;
+
+	}
+	</style>
+	<script>
+	 window.console = window.console || function(t) {};
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js">
+	</script>
+	<script>
+	 if (document.location.search.match(/type=embed/gi)) {
+	   window.parent.postMessage("resize", "*");
+	 }
+	</script>
+</head>
+<body translate="no">
+	<section id="quotes">
+		<div class="kill-quotes">
+			<blockquote data-timeout="3000">
+				<p>You feel the last bit of breath leaving their body. You’re looking into their eyes. A person in that situation is God!</p><cite>Ted Bundy</cite>
+			</blockquote>
+			<blockquote data-timeout="1800">
+				<p>It was so good I bought one for my grandma</p><cite>Richard Lee</cite>
+			</blockquote>
+			<blockquote data-timeout="1800">
+				<p>Can't wait until they release version 2!</p><cite>Samantha West</cite>
+			</blockquote>
+		</div>
+	</section>
+	<script src="//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js">
+	</script> 
+	<script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'>
+	</script> 
+	<script>
+	     function initQuoteCarousel() {
+
+	   var $quotesWrapper = $(".kill-quotes");
+	   var $quotes = $quotesWrapper.find("blockquote");
+
+	   if (!$quotes.length) {
+	       return;
+	   }
+
+	   var selectNextQuote = function () {
+	       // keep move first quote in dom to the end to make continous
+	       var $quote = $quotesWrapper.find("blockquote:first").detach().appendTo($quotesWrapper);
+
+	       setTimeout(selectNextQuote, $quote.data("timeout"));
+	   };
+
+	   setTimeout(selectNextQuote, $quotes.filter(":first").data("timeout"));
+
+	}
+
+	$(function () {
+	   initQuoteCarousel();
+	});
+	     //# sourceURL=pen.js
+	</script>
+</body>
+</html>
